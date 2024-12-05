@@ -4,6 +4,8 @@ import threading
 from queue import Queue, Empty
 import time
 
+import sys
+
 # Konfiguracja loggera
 handler = colorlog.StreamHandler()
 handler.setFormatter(colorlog.ColoredFormatter(
@@ -72,7 +74,7 @@ def deleteFiles(rshell_process, file_queue):
 
     while not file_queue.empty():
         try:
-            file = file_queue.get(timeout=5)
+            file = file_queue.get(timeout=10)
             logger.debug(f"File to delete: {file}")
             if file.endswith('.py/'):
                 file = file[:-1]
@@ -100,16 +102,16 @@ def runMain(port: str):
     pass
 
 def flashDevice():
-    rshell_process = startShell('COM7')
+    rshell_process = startShell('COM12')
     if rshell_process:
         monitor_thread = threading.Thread(
-            target=consoleMonitor, args=(rshell_process, file_queue, "COM7"), daemon=True)
+            target=consoleMonitor, args=(rshell_process, file_queue, "COM12"), daemon=True)
         monitor_thread.start()
 
         logger.debug("Waiting for Python files...")
 
         start_time = time.time()
-        timeout = 10
+        timeout = 15
 
         while True:
             if not file_queue.empty():
@@ -124,6 +126,7 @@ def flashDevice():
             deleteFiles(rshell_process, file_queue)
 
         uploadFiles(rshell_process)
+        sys.exit()
 
 
 if __name__ == "__main__":

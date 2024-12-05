@@ -86,6 +86,7 @@ def deleteFiles(rshell_process, file_queue):
         except Empty:
             logger.warning("File queue is empty.")
             break
+    logger.info("The microcontroller board was erased successfully")
 
 
 def uploadFiles(rshell_process):
@@ -96,16 +97,17 @@ def uploadFiles(rshell_process):
         rshell_process.stdin.write(command)
         rshell_process.stdin.flush()
         time.sleep(1)
+    logger.info("Files have been successfully uploaded")
     #runMain(rshell_process)
 
-def runMain(port: str):
+def runMain():
     pass
 
-def flashDevice():
-    rshell_process = startShell('COM12')
+def flashDevice(port):
+    rshell_process = startShell(port)
     if rshell_process:
         monitor_thread = threading.Thread(
-            target=consoleMonitor, args=(rshell_process, file_queue, "COM12"), daemon=True)
+            target=consoleMonitor, args=(rshell_process, file_queue, port), daemon=True)
         monitor_thread.start()
 
         logger.debug("Waiting for Python files...")
@@ -126,9 +128,9 @@ def flashDevice():
             deleteFiles(rshell_process, file_queue)
 
         uploadFiles(rshell_process)
-        sys.exit()
+
 
 
 if __name__ == "__main__":
-    flashDevice()
+    flashDevice('COM12')
 

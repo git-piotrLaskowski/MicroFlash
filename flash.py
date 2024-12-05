@@ -4,9 +4,8 @@ import threading
 from queue import Queue, Empty
 import time
 
-import sys
 
-# Konfiguracja loggera
+# Logger Configuration
 handler = colorlog.StreamHandler()
 handler.setFormatter(colorlog.ColoredFormatter(
     "%(log_color)s%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -82,7 +81,7 @@ def deleteFiles(rshell_process, file_queue):
             rshell_process.stdin.write(command)
             rshell_process.stdin.flush()
             logger.info(f"Deleted file: {file}")
-            time.sleep(1)
+            time.sleep(2)
         except Empty:
             logger.warning("File queue is empty.")
             break
@@ -96,7 +95,7 @@ def uploadFiles(rshell_process):
         logger.debug(f'Uploading file: {filename}')
         rshell_process.stdin.write(command)
         rshell_process.stdin.flush()
-        time.sleep(1)
+        time.sleep(2)
     logger.info("Files have been successfully uploaded")
     #runMain(rshell_process)
 

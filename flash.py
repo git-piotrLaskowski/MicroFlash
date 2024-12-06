@@ -59,7 +59,7 @@ def startShell(port):
             text=True,
             bufsize=1
         )
-        logger.info("Rshell process started successfully")
+        logger.debug("Rshell process started successfully")
         return rshell_process
     except FileNotFoundError:
         logger.debug("rshell executable not found. Is it installed and in PATH?")
@@ -80,12 +80,12 @@ def deleteFiles(rshell_process, file_queue):
             command = f"rm /pyboard{file}\n"
             rshell_process.stdin.write(command)
             rshell_process.stdin.flush()
-            logger.info(f"Deleted file: {file}")
+            logger.debug(f"Deleted file: {file}")
             time.sleep(2)
         except Empty:
             logger.warning("File queue is empty.")
             break
-    logger.info("The microcontroller board was erased successfully")
+    logger.debug("The microcontroller board was erased successfully")
 
 
 def uploadFiles(rshell_process):
@@ -96,7 +96,7 @@ def uploadFiles(rshell_process):
         rshell_process.stdin.write(command)
         rshell_process.stdin.flush()
         time.sleep(2)
-    logger.info("Files have been successfully uploaded")
+    logger.debug("Files have been successfully uploaded")
     #runMain(rshell_process)
 
 def runMain():
@@ -127,7 +127,6 @@ def flashDevice(port):
             deleteFiles(rshell_process, file_queue)
 
         uploadFiles(rshell_process)
-
 
 
 if __name__ == "__main__":

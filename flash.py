@@ -4,7 +4,8 @@ import threading
 from queue import Queue, Empty
 import time
 
-# Konfiguracja loggera
+
+# Logger Configuration
 handler = colorlog.StreamHandler()
 handler.setFormatter(colorlog.ColoredFormatter(
     "%(log_color)s%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -58,7 +59,7 @@ def startShell(port):
             text=True,
             bufsize=1
         )
-        logger.info("Rshell process started successfully")
+        logger.debug("Rshell process started successfully")
         return rshell_process
     except FileNotFoundError:
         logger.debug("rshell executable not found. Is it installed and in PATH?")
@@ -72,18 +73,19 @@ def deleteFiles(rshell_process, file_queue):
 
     while not file_queue.empty():
         try:
-            file = file_queue.get(timeout=5)
+            file = file_queue.get(timeout=10)
             logger.debug(f"File to delete: {file}")
             if file.endswith('.py/'):
                 file = file[:-1]
             command = f"rm /pyboard{file}\n"
             rshell_process.stdin.write(command)
             rshell_process.stdin.flush()
-            logger.info(f"Deleted file: {file}")
-            time.sleep(1)
+            logger.debug(f"Deleted file: {file}")
+            time.sleep(2)
         except Empty:
             logger.warning("File queue is empty.")
             break
+    logger.debug("The microcontroller board was erased successfully")
 
 
 def uploadFiles(rshell_process):
@@ -93,23 +95,24 @@ def uploadFiles(rshell_process):
         logger.debug(f'Uploading file: {filename}')
         rshell_process.stdin.write(command)
         rshell_process.stdin.flush()
-        time.sleep(1)
+        time.sleep(2)
+    logger.debug("Files have been successfully uploaded")
     #runMain(rshell_process)
 
-def runMain(port: str):
+def runMain():
     pass
 
-def flashDevice():
-    rshell_process = startShell('COM7')
+def flashDevice(port):
+    rshell_process = startShell(port)
     if rshell_process:
         monitor_thread = threading.Thread(
-            target=consoleMonitor, args=(rshell_process, file_queue, "COM7"), daemon=True)
+            target=consoleMonitor, args=(rshell_process, file_queue, port), daemon=True)
         monitor_thread.start()
 
         logger.debug("Waiting for Python files...")
 
         start_time = time.time()
-        timeout = 10
+        timeout = 15
 
         while True:
             if not file_queue.empty():
@@ -127,5 +130,5 @@ def flashDevice():
 
 
 if __name__ == "__main__":
-    flashDevice()
+    flashDevice('COM12')
 

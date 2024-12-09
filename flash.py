@@ -130,5 +130,5 @@ def flashDevice(port):
 
 
 if __name__ == "__main__":
-    flashDevice('COM12')
+    flashDevice('COM7')
 

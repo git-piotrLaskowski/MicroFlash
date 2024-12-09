@@ -53,6 +53,16 @@ files = [
 pyserial = ">=3.3"
 
 [[package]]
+name = "pyreadline"
+version = "2.1"
+description = "A python implmementation of GNU readline."
+optional = false
+python-versions = "*"
+files = [
+    {file = "pyreadline-2.1.zip", hash = "sha256:4530592fc2e85b25b1a9f79664433da09237c1a270e4d78ea5aa3a2c7229e2d1"},
+]
+
+[[package]]
 name = "pyreadline3"
 version = "3.5.4"
 description = "A python implementation of GNU readline."
@@ -80,7 +90,33 @@ files = [
 [package.extras]
 cp2110 = ["hidapi"]
 
+[[package]]
+name = "pyudev"
+version = "0.24.3"
+description = "A libudev binding"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "pyudev-0.24.3-py3-none-any.whl", hash = "sha256:e8246f0a014fe370119ba2bc781bfbe62c0298d0d6b39c94e83102a8a3f56960"},
+    {file = "pyudev-0.24.3.tar.gz", hash = "sha256:2e945427a21674893bb97632401db62139d91cea1ee96137cc7b07ad22198fc7"},
+]
+
+[[package]]
+name = "rshell"
+version = "0.0.36"
+description = "A remote shell for working with MicroPython boards."
+optional = false
+python-versions = "*"
+files = [
+    {file = "rshell-0.0.36.tar.gz", hash = "sha256:4a66d835207479550e59d0dd3e83003d04c4eca78a4e49250f887ed2dd4b0bf5"},
+]
+
+[package.dependencies]
+pyreadline = {version = "*", markers = "sys_platform == \"win32\""}
+pyserial = "*"
+pyudev = ">=0.16"
+
 [metadata]
 lock-version = "2.0"
-python-versions = ">=3.11,<3.12"
-content-hash = "6f6018bcfdf8e8675bdb2acc91d84c0fe2027fabd6d57406398ebb9caed9b8dc"
+python-versions = ">=3.11,<=3.12.1"
+content-hash = "dc410db6400b55f908ebf2be83396c16eecb176e55148b0fef07fba8f7c02401"

@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26751320-4ad3-4fc3-8ccb-6a8494d9d8d9" name="Changes" comment="File management before project upadte">
-      <change beforePath="$PROJECT_DIR$/.idea/uPython.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uPython.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/firmware/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/firmware/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/firmware/servo.py" beforeDir="false" afterPath="$PROJECT_DIR$/firmware/servo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flash.py" beforeDir="false" afterPath="$PROJECT_DIR$/flash.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +23,19 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="screenClicker" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
@@ -48,30 +58,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "MicroPython.Flash flash.py.executor": "Run",
-    "MicroPython.Flash main.py.executor": "Run",
-    "Python.flash.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.digi.micropython.xbee_platform": "",
-    "com.digi.pycharm.always_remove_project_dir": "false",
-    "com.digi.pycharm.compile_sources": "false",
-    "com.digi.pycharm.digi_platform": "",
-    "com.digi.pycharm.do_not_show_mp_mode_question": "false",
-    "com.digi.pycharm.do_not_show_select_device_warning": "false",
-    "com.digi.pycharm.inspect_code": "true",
-    "com.digi.pycharm.skip_equal_files": "true",
-    "com.digi.pycharm.transfer_sources": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/lasko/PycharmProjects/uPython/flash.py",
-    "settings.editor.selected.configurable": "com.jetbrains.micropython.configurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;MicroPython.Flash flash.py.executor&quot;: &quot;Run&quot;,
+    &quot;MicroPython.Flash main.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.flash.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.digi.micropython.xbee_platform&quot;: &quot;&quot;,
+    &quot;com.digi.pycharm.always_remove_project_dir&quot;: &quot;false&quot;,
+    &quot;com.digi.pycharm.compile_sources&quot;: &quot;false&quot;,
+    &quot;com.digi.pycharm.digi_platform&quot;: &quot;&quot;,
+    &quot;com.digi.pycharm.do_not_show_mp_mode_question&quot;: &quot;false&quot;,
+    &quot;com.digi.pycharm.do_not_show_select_device_warning&quot;: &quot;false&quot;,
+    &quot;com.digi.pycharm.inspect_code&quot;: &quot;true&quot;,
+    &quot;com.digi.pycharm.skip_equal_files&quot;: &quot;true&quot;,
+    &quot;com.digi.pycharm.transfer_sources&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;screenClicker&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/lasko/PycharmProjects/uPython/flash.py&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.micropython.configurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Programs\Python\_pyCharm\_projects\uPython\firmware" />
@@ -152,7 +162,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="screenClicker" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

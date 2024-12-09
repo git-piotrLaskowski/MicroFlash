@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26751320-4ad3-4fc3-8ccb-6a8494d9d8d9" name="Changes" comment="File management before project upadte">
-      <change beforePath="$PROJECT_DIR$/.idea/uPython.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uPython.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/firmware/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/firmware/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/firmware/servo.py" beforeDir="false" afterPath="$PROJECT_DIR$/firmware/servo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flash.py" beforeDir="false" afterPath="$PROJECT_DIR$/flash.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-    </list>
+    <list default="true" id="26751320-4ad3-4fc3-8ccb-6a8494d9d8d9" name="Changes" comment="Implementing button steering for servos" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,7 +58,7 @@
     "com.digi.pycharm.inspect_code": "true",
     "com.digi.pycharm.skip_equal_files": "true",
     "com.digi.pycharm.transfer_sources": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "roboticArm",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/lasko/PycharmProjects/uPython/flash.py",
     "settings.editor.selected.configurable": "com.jetbrains.micropython.configurable"
@@ -144,7 +136,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733407045750</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Implementing button steering for servos">
+      <option name="closed" value="true" />
+      <created>1733722817953</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733722817953</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -162,6 +162,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Updating poetry for better packages organization" />
     <MESSAGE value="Added some logger lines" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added some logger lines" />
+    <MESSAGE value="Implementing button steering for servos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementing button steering for servos" />
   </component>
 </project>

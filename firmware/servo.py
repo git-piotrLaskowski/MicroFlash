@@ -28,8 +28,8 @@ class Servo:
         Sets angle of servo
         :param angle: Angle in degrees (0-180)
         """
-        if not 0 <= angle <= 360:
-            raise ValueError("Angle has to be between 0-180 degrees. ")
+        if not 0 <= angle <= self.max_angle:
+            raise ValueError(f"Angle has to be between 0-{self.max_angle} degrees. ")
 
         duty = int(self.min_duty + (self.max_duty - self.min_duty) * (angle/self.max_angle))
         self.pwm.duty_u16(duty)

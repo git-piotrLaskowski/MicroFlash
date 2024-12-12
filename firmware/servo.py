@@ -2,7 +2,7 @@ import machine
 import time
 
 class Servo:
-    def __init__(self, pin, freq=50, min_us=500, max_us=2500, res=16):
+    def __init__(self, pin, max_angle=180, freq=50, min_us=500, max_us=2500, res=16):
         """
         Class for controlling servos via PWM.
 
@@ -14,6 +14,7 @@ class Servo:
         """
         self.pin_number = pin
         self.freq = freq
+        self.max_angle = max_angle
         self.min_duty = int((min_us / 20000) * (2 ** res - 1))
         self.max_duty = int((max_us / 20000) * (2 ** res - 1))
         self.range_bits = res
@@ -30,7 +31,7 @@ class Servo:
         if not 0 <= angle <= 360:
             raise ValueError("Angle has to be between 0-180 degrees. ")
 
-        duty = int(self.min_duty + (self.max_duty - self.min_duty) * (angle/180))
+        duty = int(self.min_duty + (self.max_duty - self.min_duty) * (angle/self.max_angle))
         self.pwm.duty_u16(duty)
 
     def deinit(self):

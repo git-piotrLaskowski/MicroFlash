@@ -81,7 +81,7 @@ def deleteFiles(rshell_process, file_queue):
             rshell_process.stdin.write(command)
             rshell_process.stdin.flush()
             logger.debug(f"Deleted file: {file}")
-            time.sleep(2)
+            time.sleep(1)
         except Empty:
             logger.warning("File queue is empty.")
             break
@@ -91,13 +91,14 @@ def deleteFiles(rshell_process, file_queue):
 def uploadFiles(rshell_process):
     folder_path = "firmware"
     for filename in os.listdir(folder_path):
-        command = f"cp firmware/{filename} /pyboard/{filename}\n"
-        logger.debug(f'Uploading file: {filename}')
-        rshell_process.stdin.write(command)
-        rshell_process.stdin.flush()
-        time.sleep(2)
+        if filename.endswith(".py"):
+            command = f"cp firmware/{filename} /pyboard/{filename}\n"
+            logger.debug(f'Uploading file: {filename}')
+            rshell_process.stdin.write(command)
+            rshell_process.stdin.flush()
+            time.sleep(1)
     logger.debug("Files have been successfully uploaded")
-    #runMain(rshell_process)
+
 
 def runMain():
     pass

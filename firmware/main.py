@@ -12,46 +12,53 @@ def inverse_kinematics(coordinates):
     x = int(coordinates[0])
     y = int(coordinates[1])
 
-    l1l = 50
-    l1r = 50
-    l2l = 90
-    l2r = 90
+    l1l, l1r = 50, 50
+    l2l, l2r = 90, 90
     d = 40
 
     """Calculating angles for left side of arm"""
     c = math.sqrt(x ** 2 + y ** 2)
-    gamma = math.acos((- l2l**2 + l1l**2 + c**2) / (2 * l1l * c))
-    theta = math.atan(y / x)
+    if c == 0:
+        raise ValueError("Coordinates cannot be (0, 0) because it leads to division by zero.")
+
+    gamma = math.acos(max(-1, min(1, (- l2l ** 2 + l1l ** 2 + c ** 2) / (2 * l1l * c))))  # Clamp to avoid domain errors
+    theta = math.atan2(y, x)  # atan2 handles x=0 safely
     q1 = math.degrees(theta + gamma)
 
     """Calculating angles for right side of arm"""
     e = math.sqrt((d - x) ** 2 + y ** 2)
-    epsilon  = math.acos((- l2r**2 + l1r**2 + e**2) / (2 * l1r * e))
-    psi = math.atan(y / (d - x))
+    if e == 0:
+        raise ValueError(f"Coordinates ({x}, {y}) result in e=0, which leads to division by zero.")
+
+    epsilon = math.acos(
+        max(-1, min(1, (- l2r ** 2 + l1r ** 2 + e ** 2) / (2 * l1r * e))))  # Clamp to avoid domain errors
+    psi = math.atan2(y, d - x)  # atan2 handles (d - x) = 0 safely
     q2 = math.degrees(math.pi - epsilon - psi)
 
-    return  gamma, theta, epsilon, psi, q1, q2
+    return gamma, theta, epsilon, psi, q1, q2
+
+def moveToXY(coords):
+    servo_0.set_angle(-90 + inverse_kinematics(coords)[4])
+    servo_1.set_angle(90 + inverse_kinematics(coords)[5])
+    time.sleep(0.025)
 
 
-coords = (1, 90)
-print(f"gamma: {inverse_kinematics(coords)[0]}, "
-      f"\ntheta: {inverse_kinematics(coords)[1]}, "
-      f"\nepsilon: {inverse_kinematics(coords)[2]}, "
-      f"\npsi: {inverse_kinematics(coords)[3]},       "
-      f"\nq1: {inverse_kinematics(coords)[4]},       "
-      f"\nq2: {inverse_kinematics(coords)[5]}")
+def moveBetweenPoints(point_0_coords, point_1_coords):
+    x0, y0 = point_0_coords
+    x1, y1 = point_1_coords
 
+    dx = 1 if x0 < x1 else -1 if x0 > x1 else 0
+    dy = 1 if y0 < y1 else -1 if y0 > y1 else 0
 
-angle_0 = -90 + inverse_kinematics(coords)[4]
-print(angle_0)
-servo_0.set_angle(angle_0)
-time.sleep(1)
-angle_1 = 90 + inverse_kinematics(coords)[5]
-print(angle_1)
-servo_1.set_angle(angle_1)
-time.sleep(1)
+    x, y = x0, y0
 
-#servo_0.deinit()
-#servo_1.deinit()
+    while x != x1 or y != y1:
+        moveToXY((x, y))
 
+        if x != x1:
+            x += dx
+        if y != y1:
+            y += dy
+
+    moveToXY((x1, y1))
 

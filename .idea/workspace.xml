@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26751320-4ad3-4fc3-8ccb-6a8494d9d8d9" name="Changes" comment="Improving servo library">
+    <list default="true" id="26751320-4ad3-4fc3-8ccb-6a8494d9d8d9" name="Changes" comment="Working on servo.py">
+      <change afterPath="$PROJECT_DIR$/ESP32_GENERIC-20241025-v1.24.0.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inverse_kinematics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uPython.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uPython.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firmware/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/firmware/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/firmware/servo.py" beforeDir="false" afterPath="$PROJECT_DIR$/firmware/servo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,25 +26,26 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="screenClicker" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="screenClicker" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;Laskosski&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Laskosski/uPython.git&quot;,
-    &quot;accountId&quot;: &quot;127be9fa-9681-4033-9cb3-d18306ff046d&quot;
-  }
-}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -55,40 +61,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;MicroPython.Flash flash.py.executor&quot;: &quot;Run&quot;,
-    &quot;MicroPython.Flash main.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python.flash.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.digi.micropython.xbee_platform&quot;: &quot;&quot;,
-    &quot;com.digi.pycharm.always_remove_project_dir&quot;: &quot;false&quot;,
-    &quot;com.digi.pycharm.compile_sources&quot;: &quot;false&quot;,
-    &quot;com.digi.pycharm.digi_platform&quot;: &quot;&quot;,
-    &quot;com.digi.pycharm.do_not_show_mp_mode_question&quot;: &quot;false&quot;,
-    &quot;com.digi.pycharm.do_not_show_select_device_warning&quot;: &quot;false&quot;,
-    &quot;com.digi.pycharm.inspect_code&quot;: &quot;true&quot;,
-    &quot;com.digi.pycharm.skip_equal_files&quot;: &quot;true&quot;,
-    &quot;com.digi.pycharm.transfer_sources&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;roboticArm&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/lasko/PycharmProjects/uPython/flash.py&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.micropython.configurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "MicroPython.Flash flash.py.executor": "Run",
+    "MicroPython.Flash main.py.executor": "Run",
+    "Python.Flash.executor": "Run",
+    "Python.Inverse Kinematics.executor": "Run",
+    "Python.flash.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "XBee MicroPython.inverse_kinematics.py.executor": "Run",
+    "com.digi.micropython.xbee_platform": "",
+    "com.digi.pycharm.always_remove_project_dir": "false",
+    "com.digi.pycharm.compile_sources": "false",
+    "com.digi.pycharm.digi_platform": "",
+    "com.digi.pycharm.do_not_show_mp_mode_question": "false",
+    "com.digi.pycharm.do_not_show_select_device_warning": "false",
+    "com.digi.pycharm.inspect_code": "true",
+    "com.digi.pycharm.skip_equal_files": "true",
+    "com.digi.pycharm.transfer_sources": "false",
+    "git-widget-placeholder": "screenClicker",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Programs/Python/_pyCharm/_projects/uPython",
+    "settings.editor.selected.configurable": "com.jetbrains.micropython.configurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Programs\Python\_pyCharm\_projects\uPython\firmware" />
       <recent name="C:\Programs\Python\_pyCharm\_projects\uPython" />
+      <recent name="C:\Programs\Python\_pyCharm\_projects\uPython\firmware" />
       <recent name="C:\Users\lasko\PycharmProjects\uPython" />
       <recent name="C:\Users\lasko\PycharmProjects\uPython\firmware" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="flash" type="PythonConfigurationType" factoryName="Python">
+  <component name="RunManager" selected="Python.Flash">
+    <configuration name="Flash" type="PythonConfigurationType" factoryName="Python">
       <module name="uPython" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -97,6 +106,7 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="false" />
@@ -110,6 +120,33 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Inverse Kinematics" type="PythonConfigurationType" factoryName="Python">
+      <module name="uPython" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12" />
+      <option name="WORKING_DIRECTORY" value="C:\Programs\Python\_pyCharm\_projects\uPython" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/inverse_kinematics.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.Flash" />
+      <item itemvalue="Python.Inverse Kinematics" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -151,39 +188,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733407045750</updated>
     </task>
-    <task id="LOCAL-00004" summary="Implementing button steering for servos">
+    <task id="LOCAL-00004" summary="Working on servo.py">
       <option name="closed" value="true" />
-      <created>1733722817953</created>
+      <created>1734081319937</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1733722817953</updated>
+      <updated>1734081319937</updated>
     </task>
-    <task id="LOCAL-00005" summary="Implementing button steering for servos">
-      <option name="closed" value="true" />
-      <created>1733749765882</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1733749765882</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Improving servo library">
-      <option name="closed" value="true" />
-      <created>1734001042438</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1734001042439</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Improving servo library">
-      <option name="closed" value="true" />
-      <created>1734001131698</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1734001131698</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -191,7 +204,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="screenClicker" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -201,8 +226,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Updating poetry for better packages organization" />
     <MESSAGE value="Added some logger lines" />
-    <MESSAGE value="Implementing button steering for servos" />
-    <MESSAGE value="Improving servo library" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improving servo library" />
+    <MESSAGE value="Working on servo.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working on servo.py" />
   </component>
 </project>

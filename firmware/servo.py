@@ -1,12 +1,10 @@
 import machine
-import time, math, logging
+import time, math
 
 class Servo:
     """Class for controlling servo motors via PWM."""
 
-    def __init__(self, pin, max_angle=180, freq=50, min_us=500, max_us=2500, res=16, logger=None):
-        self.logger = logger or logging.getLogger(__name__)
-        self.logger.setLevel(logging.INFO)
+    def __init__(self, pin, max_angle=180, freq=50, min_us=500, max_us=2500, res=16):
         self.pin_number = pin
         self.freq = freq
         self.max_angle = max_angle
@@ -38,24 +36,18 @@ class Servo:
 
     def calculate_duty(self, pulse_us):
         """Converts pulse width in microseconds to duty cycle value."""
-        return int((pulse_us / self.period_us) * (2 ** self.range_bits - 1))
-
-    def set_frequency(self, freq):
-        """Updates the PWM frequency and recalculates pulse range."""
-        self.freq = freq
-        self.period_us = int(1_000_000 / freq)
-        self.min_duty = self.calculate_duty(self.min_us)
-        self.max_duty = self.calculate_duty(self.max_us)
-        self.pwm.freq(freq)
+        duty = (pulse_us * (2 ** self.range_bits - 1)) // self.period_us
+        return int(duty)
 
     def set_angle(self, angle):
-        """Sets the angle of the servo."""
-        if not 0 <= angle <= self.max_angle:
+        """Sets the servo angle."""
+        if not (0 <= angle <= self.max_angle):
             raise ValueError(f"Angle must be between 0 and {self.max_angle}.")
-        duty = self.min_duty + (self.max_duty - self.min_duty) * (angle / self.max_angle)
-        logging.debug(f"Setting angle: {angle}, duty cycle: {int(duty)}")
-        self.pwm.duty_u16(int(duty))
         self.current_angle = angle
+        # Interpolate pulse width for the given angle
+        pulse_us = self.min_us + (self.max_us - self.min_us) * angle // self.max_angle
+        duty = self.calculate_duty(pulse_us)
+        self.pwm.duty_u16(duty)
 
     def smooth_move(self, start_angle, end_angle, duration, steps=None, interpolation="sin"):
         """Moves the servo smoothly from start_angle to end_angle."""
@@ -65,6 +57,10 @@ class Servo:
         else:
             step_time = duration / steps
 
+        if interpolation not in self.allowed_interpolations:
+            raise ValueError(f"Unsupported interpolation method. Choose from {self.allowed_interpolations}.")
+
+        delta_angle = end_angle - start_angle
         for step in range(steps + 1):
             t = step / steps
             if interpolation == "sin":
@@ -75,14 +71,9 @@ class Servo:
                 t = 3 * t ** 2 - 2 * t ** 3
             elif interpolation == "quad":
                 t = t ** 2
-            else:
-                raise ValueError("Unsupported interpolation method.")
-            angle = start_angle + (end_angle - start_angle) * t
+            angle = start_angle + delta_angle * t
             self.set_angle(angle)
             time.sleep(step_time)
-
-        if interpolation not in self.allowed_interpolations:
-            raise ValueError(f"Unsupported interpolation method. Choose from {self.allowed_interpolations}.")
 
     def center(self):
         """Resets the servo to its center position."""

@@ -9,8 +9,8 @@ servo_1 = servo.Servo(pin=4, max_angle=max_angle, freq=50, min_us=500, max_us=25
 
 
 def inverse_kinematics(coordinates):
-    x = int(coordinates[0])
-    y = int(coordinates[1])
+    x = int(coordinates[0]) + 20
+    y = int(coordinates[1]) + 30
 
     l1l, l1r = 50, 50
     l2l, l2r = 90, 90
@@ -40,7 +40,7 @@ def inverse_kinematics(coordinates):
 def moveToXY(coords):
     servo_0.set_angle(-90 + inverse_kinematics(coords)[4])
     servo_1.set_angle(90 + inverse_kinematics(coords)[5])
-    time.sleep(0.025)
+    time.sleep(0.0125)
 
 
 def moveBetweenPoints(point_0_coords, point_1_coords):

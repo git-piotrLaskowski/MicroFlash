@@ -1,4 +1,4 @@
-# Micro Python Touch Robot
+# MicroFlash
 The program manages files on a microcontroller connected via `rshell`.  
 
 # **Functionality**:

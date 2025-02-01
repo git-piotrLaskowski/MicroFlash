@@ -1,4 +1,5 @@
 # Micro Python Touch Robot
+
 ## 1. Erasing board:
 
 Remember to change port (COM5) to actual one on your PC

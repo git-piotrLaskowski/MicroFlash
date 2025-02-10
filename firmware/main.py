@@ -1,46 +1,90 @@
 import time
 import math
-import servo
+import servo, machine
 
+# Servo configuration
 max_angle = 270
 min_angle = 60
-servo_0 = servo.Servo(pin=2, max_angle=max_angle, freq=50, min_us=500, max_us=2500)
-servo_1 = servo.Servo(pin=4, max_angle=max_angle, freq=50, min_us=500, max_us=2500)
-
+servo_0 = servo.Servo(pin=4, max_angle=max_angle, freq=50, min_us=500, max_us=2500)
+servo_1 = servo.Servo(pin=5, max_angle=max_angle, freq=50, min_us=500, max_us=2500)
+servo_2 = servo.Servo(pin=18, max_angle=max_angle, freq=50, min_us=500, max_us=2500)
+led_0 = machine.Pin(21, machine.Pin.OUT)
+led_1 = machine.Pin(22, machine.Pin.OUT)
+pinMode = machine.Pin(23, machine.Pin.OUT)
 
 def inverse_kinematics(coordinates):
-    x = int(coordinates[0]) + 20
-    y = int(coordinates[1]) + 30
+    # Transform coordinates
+    x = -1 * int(coordinates[0]) + 95
+    y = -1 * int(coordinates[1]) + 85
 
-    l1l, l1r = 50, 50
-    l2l, l2r = 90, 90
-    d = 40
+    print(f"Transformed coordinates: ({x}, {y})")
 
-    """Calculating angles for left side of arm"""
-    c = math.sqrt(x ** 2 + y ** 2)
-    if c == 0:
-        raise ValueError("Coordinates cannot be (0, 0) because it leads to division by zero.")
+    # Geometric parameters
+    l1, l2 = 50, 90  # Lengths of the first and second arms (both sides are symmetrical)
+    d = 40           # Distance between servo axes
 
-    gamma = math.acos(max(-1, min(1, (- l2l ** 2 + l1l ** 2 + c ** 2) / (2 * l1l * c))))  # Clamp to avoid domain errors
-    theta = math.atan2(y, x)  # atan2 handles x=0 safely
+    # Define workspace dynamically based on `y`
+    if y > 85:
+        workspace = {
+            "min_x": 135,  # Expanded min_x if y < 0
+            "max_x": -45,  # Expanded max_x if y < 0
+            "min_y": 105,
+            "max_y": 35
+        }
+    else:
+        workspace = {
+            "min_x": 95,  # Default min_x for y >= 0
+            "max_x": -20, # Default max_x for y >= 0
+            "min_y": 105,
+            "max_y": 35
+        }
+
+    # Check if the point is within workspace boundaries
+    if not (workspace["max_x"] <= x <= workspace["min_x"] and workspace["max_y"] <= y <= workspace["min_y"]):
+        raise ValueError(f"Point ({x}, {y}) is outside the available working area.")
+
+    # Calculate distance and angles for left and right arms
+    def calculate_angles(a_x, a_y, l1, l2):
+        dist = math.sqrt(a_x ** 2 + a_y ** 2)
+        if dist == 0:
+            raise ValueError(f"Coordinates ({a_x}, {a_y}) result in a distance of 0, leading to division by zero.")
+
+        angle1 = math.acos(max(-1, min(1, (-l2 ** 2 + l1 ** 2 + dist ** 2) / (2 * l1 * dist))))
+        angle2 = math.atan2(a_y, a_x)
+        return angle1, angle2
+
+    # Left arm calculations
+    gamma, theta = calculate_angles(x, y, l1, l2)
+
+    # Right arm calculations (adjust x-coordinate by `d`)
+    epsilon, psi = calculate_angles(d - x, y, l1, l2)
+
+    # Calculate servo angles in degrees
     q1 = math.degrees(theta + gamma)
-
-    """Calculating angles for right side of arm"""
-    e = math.sqrt((d - x) ** 2 + y ** 2)
-    if e == 0:
-        raise ValueError(f"Coordinates ({x}, {y}) result in e=0, which leads to division by zero.")
-
-    epsilon = math.acos(
-        max(-1, min(1, (- l2r ** 2 + l1r ** 2 + e ** 2) / (2 * l1r * e))))  # Clamp to avoid domain errors
-    psi = math.atan2(y, d - x)  # atan2 handles (d - x) = 0 safely
     q2 = math.degrees(math.pi - epsilon - psi)
 
-    return gamma, theta, epsilon, psi, q1, q2
+    return {
+        "q1": q1,
+        "q2": q2
+    }
 
-def moveToXY(coords):
-    servo_0.set_angle(-90 + inverse_kinematics(coords)[4])
-    servo_1.set_angle(90 + inverse_kinematics(coords)[5])
-    time.sleep(0.0125)
+def click():
+    try:
+        servo_2.set_angle(30)
+        time.sleep(0.2)
+        servo_2.set_angle(0)
+    except ValueError as e:
+        print(f"Error: {e}")
+
+def moveToXY(coordinates):
+    try:
+        angles = inverse_kinematics(coordinates)
+        servo_0.set_angle(angles["q1"])
+        servo_1.set_angle(90 + angles["q2"])
+        time.sleep(0.0125)
+        print(f"Calculated angles: {angles}")
+    except ValueError as e:
+        print(f"Error: {e}")
 
 
 def moveBetweenPoints(point_0_coords, point_1_coords):
@@ -61,4 +105,3 @@ def moveBetweenPoints(point_0_coords, point_1_coords):
             y += dy
 
     moveToXY((x1, y1))
-

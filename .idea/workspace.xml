@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26751320-4ad3-4fc3-8ccb-6a8494d9d8d9" name="Changes" comment="Working on servo.py">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2024_12_06_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2024_12_06__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/firmware/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/firmware/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flash.py" beforeDir="false" afterPath="$PROJECT_DIR$/flash.py" afterDir="false" />
